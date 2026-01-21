@@ -4,114 +4,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hannie's Tech Journey</title>
+    <title>Hannie's Tech Hub</title>
     <style>
         :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --dark: #2d3436;
-            --light: #f9f9f9;
+            --mint: #55efc4;
+            --mint-dark: #00b894;
+            --bg: #f7fffb;
+            --text: #2d3436;
+            --glass: rgba(255, 255, 255, 0.95);
         }
 
         body {
-            font-family: 'Segoe UI', system-ui;
+            font-family: 'PingFang SC', sans-serif;
             margin: 0;
-            background: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
+            background: #f0f2f5;
+            color: var(--text);
+            overflow-x: hidden;
         }
 
-        /* 导航栏 */
+        /* --- 首页样式 --- */
         nav {
             background: white;
-            padding: 1rem 10%;
+            padding: 15px 10%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             position: sticky;
             top: 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .logo {
             font-weight: bold;
-            font-size: 1.5rem;
-            color: var(--primary);
+            color: var(--mint-dark);
+            font-size: 1.2rem;
         }
 
-        .nav-links a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        /* 英雄页 - 个人介绍 */
-        header {
-            padding: 80px 10%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-        }
-
-        .status-badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        /* 内容区块 */
-        section {
-            padding: 60px 10%;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
+        /* 个人资料卡 */
+        .profile-card {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--mint);
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
+        .avatar:hover {
+            transform: scale(1.05);
         }
 
-        /* 番茄钟插件样式 */
-        .pomodoro {
+        /* 技术卡片网格 */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
-            background: #fff;
-            border: 2px solid var(--primary);
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid transparent;
         }
 
-        #timer {
-            font-size: 3rem;
+        .tech-card:hover {
+            border-color: var(--mint);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow-mint);
+        }
+
+        .time-badge {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--mint-dark);
             font-weight: bold;
-            color: var(--primary);
-            margin: 15px 0;
         }
 
-        .timer-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 8px;
+        /* --- 瀑布流相册 --- */
+        .waterfall {
+            column-count: 3;
+            column-gap: 15px;
+            margin-top: 50px;
+        }
+
+        .waterfall-item {
+            break-inside: avoid;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .waterfall-item img {
+            width: 100%;
+            display: block;
+        }
+
+        /* --- 沉浸式番茄钟页面 (重点) --- */
+        #focus-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .focus-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* 左侧：计时器 */
+        .timer-side {
+            flex: 2;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .timer-circle {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            border: 8px solid var(--mint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: white;
+            box-shadow: 0 0 50px rgba(85, 239, 196, 0.2);
+        }
+
+        #timer-display {
+            font-size: 5rem;
+            font-weight: bold;
+            color: var(--mint-dark);
+            font-family: monospace;
+        }
+
+        /* 右侧：资料与统计 */
+        .info-side {
+            flex: 1;
+            padding: 60px;
+            border-left: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .stats-card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .feishu-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            transition: 0.3s;
             cursor: pointer;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px;
+        .feishu-link:hover {
+            border-color: var(--mint);
+            background: var(--bg);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-mint {
+            background: var(--mint);
+            color: white;
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 30px;
+            left: 30px;
             background: #eee;
+        }
+
+        footer {
+            background: #2d3436;
+            color: white;
+            padding: 40px 10%;
+            text-align: center;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -119,101 +248,165 @@
 <body>
 
     <nav>
-        <div class="logo">Hannie-forever-me</div>
-        <div class="nav-links">
-            <a href="#about">关于我</a>
-            <a href="#learning">正在学习</a>
-            <a href="#pomodoro">学习计时</a>
-            <a href="#projects">项目成果</a>
-        </div>
+        <div class="logo">☘️ HANNIE TECH</div>
     </nav>
 
-    <header id="about">
-        <div class="status-badge">🟢 学习中 - 专注于 Web 前端</div>
-        <h1>你好，我是 Hannie</h1>
-        <p>正在探索 JavaScript 的无限可能，致力于构建美观且实用的网页应用。</p>
-    </header>
-
-    <section id="learning">
-        <h2 style="text-align:center">当前学习进度</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>HTML5 & CSS3</h3>
-                <p><strong>资料来源：</strong> MDN Web Docs & Bilibili</p>
-                <p><strong>学习成果：</strong> 掌握了响应式设计、Flexbox 与 CSS Grid。</p>
+    <div class="container" id="main-content">
+        <section class="profile-card">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hannie" class="avatar" alt="Avatar">
+            <div>
+                <h1>Hannie-forever-me</h1>
+                <p>正在学习前端的 Web 开发学生 | 专注于 HTML · CSS · JS · VUE</p>
             </div>
-            <div class="card">
-                <h3>JavaScript ES6+</h3>
-                <p><strong>资料来源：</strong> 阮一峰 JS 教程</p>
-                <p><strong>学习成果：</strong> 理解了异步编程与 DOM 操作。</p>
+        </section>
+
+        <div class="tech-grid">
+            <div class="tech-card" onclick="startFocus('HTML', 'https://feishu.cn/your-link-html')">
+                <h3>HTML</h3>
+                <span class="time-badge" id="badge-HTML">0 mins</span>
             </div>
-        </div>
-    </section>
-
-    <section id="pomodoro" style="background: #f0f0ff;">
-        <h2 style="text-align:center">沉浸式学习计时器</h2>
-        <div class="card pomodoro" style="max-width: 400px; margin: 0 auto;">
-            <p>专注时间：25分钟</p>
-            <div id="timer">25:00</div>
-            <button class="timer-btn" id="startBtn">开始专注</button>
-            <button class="timer-btn" id="resetBtn" style="background:#636e72">重置</button>
-        </div>
-    </section>
-
-    <section id="projects">
-        <h2 style="text-align:center">我的项目</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Done List 应用</h3>
-                <p>一个简单高效的待办清单，支持本地存储。</p>
-                <a href="#">查看代码</a>
+            <div class="tech-card" onclick="startFocus('CSS', 'https://feishu.cn/your-link-css')">
+                <h3>CSS</h3>
+                <span class="time-badge" id="badge-CSS">0 mins</span>
+            </div>
+            <div class="tech-card" onclick="startFocus('JavaScript', 'https://feishu.cn/your-link-js')">
+                <h3>JavaScript</h3>
+                <span class="time-badge" id="badge-JavaScript">0 mins</span>
+            </div>
+            <div class="tech-card" onclick="startFocus('工程化', 'https://feishu.cn/your-link-eng')">
+                <h3>工程化</h3>
+                <span class="time-badge" id="badge-工程化">0 mins</span>
+            </div>
+            <div class="tech-card" onclick="startFocus('VUE', 'https://feishu.cn/your-link-vue')">
+                <h3>VUE</h3>
+                <span class="time-badge" id="badge-VUE">0 mins</span>
             </div>
         </div>
-    </section>
+
+        <div class="waterfall">
+            <div class="waterfall-item"><img src="1.jgp"></div>
+            <div class="waterfall-item"><img src="2.jpg"></div>
+            <div class="waterfall-item"><img src="3.jpg"></div>
+            <div class="waterfall-item"><img src="4.jpg"></div>
+            <div class="waterfall-item"><img src="5.jpg"></div>
+        </div>
+    </div>
+
+    <div id="focus-page">
+        <button class="btn btn-close" onclick="exitFocus()">← 退出专注</button>
+        <div class="focus-container">
+            <div class="timer-side">
+                <h2 id="focus-title" style="margin-bottom: 30px; color: var(--mint-dark);">正在学习</h2>
+                <div class="timer-circle">
+                    <div id="timer-display">25:00</div>
+                </div>
+                <div style="margin-top: 40px;">
+                    <button class="btn btn-mint" id="start-btn" onclick="toggleTimer()">开始专注</button>
+                    <button class="btn" onclick="resetTimer()" style="margin-left:10px;">重置</button>
+                </div>
+            </div>
+            <div class="info-side">
+                <div class="stats-card">
+                    <h4 style="margin-top:0">📊 本次学习统计</h4>
+                    <p>当前技术累计时长：<span id="total-time-display" style="font-weight:bold; color:var(--mint-dark);">0</span>
+                        分钟</p>
+                </div>
+                <div>
+                    <h4>📚 资料来源</h4>
+                    <div class="feishu-link" onclick="window.open(currentFeishuUrl)">
+                        <img src="https://s1-imfile.feishucdn.com/static-resource/v1/593e~?image_size=72x72&cut_type=&quality=&format=image&sticker_format=.webp"
+                            width="24">
+                        <span>点击跳转到：飞书学习文档</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
-        <p>© 2026 Hannie-forever-me | 由 GitHub Pages 驱动</p>
+        <p>© 2026 Hannie-forever-me | 课程设计作品</p>
     </footer>
 
     <script>
-        // 番茄钟逻辑
+        let currentTech = "";
+        let currentFeishuUrl = "";
         let timeLeft = 25 * 60;
         let timerId = null;
+        let accumulatedSeconds = 0;
 
-        const timerDisplay = document.getElementById('timer');
-        const startBtn = document.getElementById('startBtn');
-        const resetBtn = document.getElementById('resetBtn');
-
-        function updateDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        // 初始化加载时间
+        window.onload = () => {
+            ['HTML', 'CSS', 'JavaScript', '工程化', 'VUE'].forEach(tech => {
+                const mins = localStorage.getItem(`time-${tech}`) || 0;
+                document.getElementById(`badge-${tech}`).textContent = `${mins} mins`;
+            });
         }
 
-        startBtn.onclick = () => {
+        // 进入番茄钟“新页面”
+        function startFocus(tech, url) {
+            currentTech = tech;
+            currentFeishuUrl = url;
+            document.getElementById('focus-title').textContent = `正在沉浸式学习: ${tech}`;
+            document.getElementById('total-time-display').textContent = localStorage.getItem(`time-${tech}`) || 0;
+            document.getElementById('focus-page').style.display = 'block';
+            resetTimer();
+        }
+
+        // 退出“新页面”
+        function exitFocus() {
+            saveTime();
+            document.getElementById('focus-page').style.display = 'none';
+            clearInterval(timerId);
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('start-btn');
             if (timerId) {
                 clearInterval(timerId);
                 timerId = null;
-                startBtn.textContent = '恢复';
+                btn.textContent = '恢复专注';
+                saveTime();
             } else {
                 timerId = setInterval(() => {
                     timeLeft--;
+                    accumulatedSeconds++;
                     updateDisplay();
-                    if (timeLeft <= 0) clearInterval(timerId);
+                    if (timeLeft <= 0) {
+                        clearInterval(timerId);
+                        alert('专注结束！');
+                        saveTime();
+                    }
                 }, 1000);
-                startBtn.textContent = '暂停';
+                btn.textContent = '暂停';
             }
-        };
+        }
 
-        resetBtn.onclick = () => {
+        function updateDisplay() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            document.getElementById('timer-display').textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function saveTime() {
+            if (accumulatedSeconds < 60) return;
+            const addMins = Math.floor(accumulatedSeconds / 60);
+            const oldMins = parseInt(localStorage.getItem(`time-${currentTech}`) || 0);
+            const newTotal = oldMins + addMins;
+            localStorage.setItem(`time-${currentTech}`, newTotal);
+            document.getElementById(`badge-${currentTech}`).textContent = `${newTotal} mins`;
+            document.getElementById('total-time-display').textContent = newTotal;
+            accumulatedSeconds %= 60;
+        }
+
+        function resetTimer() {
             clearInterval(timerId);
             timerId = null;
             timeLeft = 25 * 60;
+            accumulatedSeconds = 0;
             updateDisplay();
-            startBtn.textContent = '开始专注';
-        };
+            document.getElementById('start-btn').textContent = '开始专注';
+        }
     </script>
-
 </body>
 
 </html>
