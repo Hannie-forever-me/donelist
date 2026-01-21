@@ -3,81 +3,217 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>我的 Done List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hannie's Tech Journey</title>
     <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f9f9f9;
+        }
+
         body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 50px;
-            background: #f4f7f6;
+            font-family: 'Segoe UI', system-ui;
+            margin: 0;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
         }
 
-        .container {
+        /* 导航栏 */
+        nav {
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            padding: 1rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
         }
 
-        h2 {
-            color: #333;
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* 英雄页 - 个人介绍 */
+        header {
+            padding: 80px 10%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             text-align: center;
         }
 
-        input {
-            width: 80%;
-            padding: 8px;
-            border: 1px solid #ddd;
+        .status-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
         }
 
-        button {
-            padding: 8px;
-            cursor: pointer;
-            background: #2ea44f;
+        /* 内容区块 */
+        section {
+            padding: 60px 10%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 番茄钟插件样式 */
+        .pomodoro {
+            text-align: center;
+            background: #fff;
+            border: 2px solid var(--primary);
+        }
+
+        #timer {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        .timer-btn {
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 4px;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        li {
+        footer {
+            text-align: center;
+            padding: 40px;
             background: #eee;
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h2>我的任务清单</h2>
-        <input type="text" id="taskInput" placeholder="输入新任务...">
-        <button onclick="addTask()">添加</button>
-        <ul id="taskList"></ul>
-    </div>
+
+    <nav>
+        <div class="logo">Hannie-forever-me</div>
+        <div class="nav-links">
+            <a href="#about">关于我</a>
+            <a href="#learning">正在学习</a>
+            <a href="#pomodoro">学习计时</a>
+            <a href="#projects">项目成果</a>
+        </div>
+    </nav>
+
+    <header id="about">
+        <div class="status-badge">🟢 学习中 - 专注于 Web 前端</div>
+        <h1>你好，我是 Hannie</h1>
+        <p>正在探索 JavaScript 的无限可能，致力于构建美观且实用的网页应用。</p>
+    </header>
+
+    <section id="learning">
+        <h2 style="text-align:center">当前学习进度</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>HTML5 & CSS3</h3>
+                <p><strong>资料来源：</strong> MDN Web Docs & Bilibili</p>
+                <p><strong>学习成果：</strong> 掌握了响应式设计、Flexbox 与 CSS Grid。</p>
+            </div>
+            <div class="card">
+                <h3>JavaScript ES6+</h3>
+                <p><strong>资料来源：</strong> 阮一峰 JS 教程</p>
+                <p><strong>学习成果：</strong> 理解了异步编程与 DOM 操作。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pomodoro" style="background: #f0f0ff;">
+        <h2 style="text-align:center">沉浸式学习计时器</h2>
+        <div class="card pomodoro" style="max-width: 400px; margin: 0 auto;">
+            <p>专注时间：25分钟</p>
+            <div id="timer">25:00</div>
+            <button class="timer-btn" id="startBtn">开始专注</button>
+            <button class="timer-btn" id="resetBtn" style="background:#636e72">重置</button>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 style="text-align:center">我的项目</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Done List 应用</h3>
+                <p>一个简单高效的待办清单，支持本地存储。</p>
+                <a href="#">查看代码</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Hannie-forever-me | 由 GitHub Pages 驱动</p>
+    </footer>
 
     <script>
-        function addTask() {
-            const input = document.getElementById('taskInput');
-            const val = input.value;
-            if (val) {
-                const li = document.createElement('li');
-                li.innerHTML = val + '<button onclick="this.parentElement.remove()">完成</button>';
-                document.getElementById('taskList').appendChild(li);
-                input.value = '';
-            }
+        // 番茄钟逻辑
+        let timeLeft = 25 * 60;
+        let timerId = null;
+
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
+
+        startBtn.onclick = () => {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+                startBtn.textContent = '恢复';
+            } else {
+                timerId = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) clearInterval(timerId);
+                }, 1000);
+                startBtn.textContent = '暂停';
+            }
+        };
+
+        resetBtn.onclick = () => {
+            clearInterval(timerId);
+            timerId = null;
+            timeLeft = 25 * 60;
+            updateDisplay();
+            startBtn.textContent = '开始专注';
+        };
     </script>
+
 </body>
 
 </html>
