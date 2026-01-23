@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 必须加的基础样式：让元素可见、小圆点有样式 */
+        .slider {
+            width: 600px;
+            margin: 20px auto;
+            border: 1px solid #eee;
+            padding: 10px;
+        }
+
+        .slider-wrapper img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            /* 保证图片比例 */
+        }
+
+        .slider-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        /* 小圆点基础样式：没激活时是灰色 */
+        .slider-indicator {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .slider-indicator li {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            /* 圆形 */
+            background-color: #ccc;
+            margin: 0 6px;
+            cursor: pointer;
+        }
+
+        /* 小圆点激活样式：变红 */
+        .slider-indicator li.active {
+            background-color: #e63946;
+        }
+
+        /* 按钮样式，可选 */
+        .toggle button {
+            padding: 6px 12px;
+            border: none;
+            background: #f5f5f5;
+            cursor: pointer;
+        }
+
+        .toggle button:hover {
+            background: #eee;
+        }
+
+        /* p标签文字默认样式：避免和背景同色 */
+        .slider-footer p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <div class="slider-wrapper">
+            <img src="./1.jpg" alt="">
+        </div>
+        <div class="slider-footer">
+            <p></p>
+            <ul class="slider-indicator">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+
+            </ul>
+            <div class="toggle">
+                <button class="prev">上一张</button>
+                <button class="next">下一张</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const sliderData = [
+            { url: './1.jpg', title: '你好', color: '#fff' },
+            { url: './2.jpg', title: '我好', color: '#000' },
+            { url: './3.jpg', title: '大家好', color: '#fff' },
+            { url: './4.jpg', title: '欢迎光临', color: '#000' },
+            { url: './5.jpg', title: '祝你愉快', color: '#fff' }
+        ]
+        // 1.需要一个随机数
+        const random = parseInt(Math.random() * sliderData.length);
+        // 2.把随机数对应的数据取出来
+        const img = document.querySelector('.slider-wrapper img')
+        // 3.修改图片路径
+        img.src = sliderData[random].url;
+        // 4.获取p
+        const p = document.querySelector('.slider-footer p')
+        // 5.修改p的内容
+        p.innerHTML = sliderData[random].title;
+        // 6.获取footer
+        const footer = document.querySelector('.slider-footer')
+        // 7.修改背景颜色
+        footer.style.backgroundColor = sliderData[random].color;
+        // 8.小圆点
+        const li = document.querySelector(`.slider-indicator li:nth-child(${random + 1})`);
+        li.classList.add('active');
+    </script>
+</body>
+
+</html>

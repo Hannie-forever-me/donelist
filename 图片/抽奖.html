@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <strong>抽奖活动</strong>
+        <h1>一等奖<span id="one">???</span></h1>
+        <h2>二等奖<span id="two">???</span></h2>
+        <h3>三等奖<span id="three">???</span></h3>
+    </div>
+    <script>
+        const personArr = ['张三', '李四', '王五', '赵六', '钱七', '孙八', '周九', '吴十'];
+        const random = Math.floor(Math.random() * personArr.length);
+        const one = document.querySelector('#one');
+        one.innerHTML = personArr[random];
+        personArr.splice(random, 1);
+        console.log(personArr);
+
+        const random2 = Math.floor(Math.random() * personArr.length);
+        const two = document.querySelector('#two');
+        two.innerHTML = personArr[random2];
+        personArr.splice(random2, 1);
+        console.log(personArr);
+
+        const random3 = Math.floor(Math.random() * personArr.length);
+        const three = document.querySelector('#three');
+        three.innerHTML = personArr[random3];
+        personArr.splice(random3, 1);
+        console.log(personArr);
+    </script>
+</body>
+
+</html>

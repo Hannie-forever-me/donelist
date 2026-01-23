@@ -4,39 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hannie's Tech Journey - Full Edition</title>
+    <title>Hannie's Tech Hub V9 - Perfect Alignment</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --pony-pink: #ffdae9;
+            --pony-pink: #ff69b4;
             --pony-soft: #fff0f6;
             --pony-deep: #ff85a1;
-            --text-main: #4a4a4a;
-            --pixel-orange: #ff9f43;
-            --white-glass: rgba(255, 255, 255, 0.85);
+            --glass-white: rgba(255, 255, 255, 0.95);
         }
 
         body {
             font-family: 'PingFang SC', sans-serif;
             margin: 0;
             background: var(--pony-soft);
-            color: var(--text-main);
+            color: #4a4a4a;
             overflow-x: hidden;
         }
 
-        /* --- 1. 主页样式 --- */
-        #home-page {
-            display: block;
-        }
-
+        /* --- 首页 --- */
         nav {
             background: white;
             padding: 15px 10%;
             display: flex;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
             box-shadow: 0 2px 10px rgba(255, 133, 161, 0.1);
         }
 
@@ -55,82 +46,61 @@
         .profile-card {
             background: white;
             border-radius: 30px;
-            padding: 50px;
+            padding: 40px;
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 40px;
             box-shadow: 0 20px 40px rgba(255, 133, 161, 0.1);
             margin-bottom: 50px;
         }
 
         .avatar {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 6px solid var(--pony-pink);
-            padding: 5px;
-            background: white;
-            transition: 0.5s;
-            cursor: pointer;
+            border: 5px solid var(--pony-soft);
         }
 
         .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            margin: 40px 0;
             color: var(--pony-deep);
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 1.4rem;
         }
 
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
         }
 
         .tech-card {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
             cursor: pointer;
-            transition: 0.4s;
-            border-bottom: 5px solid transparent;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+            transition: 0.3s;
+            border-bottom: 4px solid transparent;
         }
 
         .tech-card:hover {
-            transform: translateY(-10px);
-            border-bottom: 5px solid var(--pony-pink);
-            box-shadow: 0 15px 30px rgba(255, 133, 161, 0.2);
+            border-bottom-color: var(--pony-pink);
+            transform: translateY(-5px);
         }
 
-        .time-badge {
-            color: var(--pony-deep);
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: block;
-        }
-
-        /* --- 瀑布流相册样式 --- */
         .gallery {
-            column-count: 3;
-            column-gap: 20px;
-            margin-top: 40px;
-            margin-bottom: 60px;
+            column-count: 4;
+            column-gap: 15px;
+            margin-top: 20px;
         }
 
         .gallery-item {
             break-inside: avoid;
-            margin-bottom: 20px;
-            border-radius: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
         .gallery-item img {
@@ -138,7 +108,16 @@
             display: block;
         }
 
-        /* --- 2. 专注页样式 --- */
+        footer {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 50px;
+        }
+
+        /* --- 专注页核心对齐逻辑 --- */
         #focus-page {
             display: none;
             position: fixed;
@@ -146,108 +125,175 @@
             left: 0;
             width: 100%;
             height: 100%;
+            background: linear-gradient(135deg, #ffe4e1 0%, #fff0f5 100%);
             z-index: 1000;
             overflow-y: auto;
-            background-image: url('https://w.wallhaven.cc/full/r2/wallhaven-r2222m.png');
-            background-size: cover;
-            background-position: center;
-            animation: fadeIn 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 12px 25px;
-            background: white;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            color: var(--pony-deep);
+        .focus-header {
+            background: var(--pony-pink);
+            color: white;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .focus-layout {
-            max-width: 1200px;
-            margin: 80px auto;
+            max-width: 1300px;
+            margin: 20px auto;
             display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
-            gap: 25px;
-            padding: 20px;
+            grid-template-columns: 0.8fr 1fr 1.5fr;
+            gap: 20px;
+            padding: 0 20px;
+            align-items: stretch;
+            /* 关键：强制所有列等高 */
         }
 
-        .glass-card {
-            background: var(--white-glass);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 30px;
+        /* 左侧：番茄钟卡片 */
+        .glass-card-timer {
+            background: var(--glass-white);
+            border-radius: 35px;
+            padding: 40px 20px;
             border: 2px solid white;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 像素番茄钟 */
-        .pixel-timer {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 5.5rem;
-            font-weight: bold;
-            color: var(--pixel-orange);
-            background: #2d3436;
-            display: inline-block;
-            padding: 20px 40px;
-            margin: 20px 0;
-            border: 5px solid #ff85a1;
-            border-radius: 15px;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2);
-        }
-
-        .timer-input-group {
-            margin-bottom: 15px;
-        }
-
-        .timer-input-group input {
-            padding: 8px;
-            width: 60px;
-            border-radius: 10px;
-            border: 2px solid var(--pony-pink);
             text-align: center;
-            font-size: 1.1rem;
-            outline: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .btn-start {
-            background: var(--pony-deep);
-            color: white;
-            padding: 15px 40px;
+        .timer-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 8px solid #ffb6c1;
+            margin-bottom: 20px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .timer-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #timer-display {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--pony-pink);
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* 中间：板块选择 + 饼图 */
+        .center-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sector-btns-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: var(--glass-white);
+            padding: 15px;
+            border-radius: 25px;
+            border: 2px solid white;
+        }
+
+        .sector-btn {
+            padding: 10px;
             border: none;
-            border-radius: 50px;
+            border-radius: 12px;
+            color: white;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 133, 161, 0.4);
+            transition: 0.2s;
+            font-size: 0.85rem;
         }
 
-        .chart-container {
-            height: 240px;
-            margin-top: 15px;
+        .sector-btn.active {
+            outline: 4px solid var(--pony-pink);
+            transform: scale(1.02);
         }
 
-        footer {
+        .pie-container {
+            background: var(--glass-white);
+            border-radius: 25px;
+            padding: 20px;
+            border: 2px solid white;
+            flex-grow: 1;
+            /* 关键：自动撑开 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 右侧：数据与趋势 */
+        .data-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .action-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-main {
             background: white;
-            color: var(--pony-deep);
-            padding: 40px 10%;
+            border: 3px solid var(--pony-pink);
+            border-radius: 20px;
+            padding: 15px;
+            cursor: pointer;
+            color: var(--pony-pink);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .btn-main.running {
+            background: #ffecf2;
+            border-style: dashed;
+        }
+
+        .btn-link {
+            background: var(--pony-deep);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .stat-card-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .small-stat {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
             text-align: center;
-            border-top: 1px solid var(--pony-pink);
+            border: 1px solid #fff;
+        }
+
+        /* 趋势表修正：去掉固定高度，使用 flex-grow 1 确保与左边底部对齐 */
+        .line-chart-box {
+            background: white;
+            padding: 20px;
+            border-radius: 25px;
+            flex-grow: 1;
+            /* 关键：让它撑满剩余高度，实现底部对齐 */
+            display: flex;
+            flex-direction: column;
+            min-height: 250px;
         }
     </style>
 </head>
@@ -256,230 +302,248 @@
 
     <div id="home-page">
         <nav>
-            <div class="logo">🦄 HANNIE PONY HUB</div>
+            <div class="logo">🦄 HANNIE LEARNING HUB</div>
         </nav>
         <div class="container">
             <div class="profile-card">
-                <img src="./图片/头像.png" class="avatar" alt="Avatar">
+                <img src="./图片/头像.png" class="avatar">
                 <div>
-                    <h1 style="font-size: 2.5rem; color: var(--pony-deep); margin: 0;">Hannie</h1>
-                    <p>正在学习前端开发的学生 |先完成，再完美！✨</p>
+                    <h1 style="color: var(--pony-deep); margin: 0;">Hannie</h1>
+                    <p>正在学习前端开发 | 先完成，再完美！✨</p>
                 </div>
             </div>
-
-            <h2 class="section-title">🌸 正在学习ing</h2>
-            <div class="tech-grid">
-                <div class="tech-card"
-                    onclick="openFocusPage('HTML', 'https://my.feishu.cn/wiki/KK1ywC376ikQ35kpvXjcL0oIn5g?fromScene=spaceOverview')">
-                    <h3 style="color:#e67e22">HTML</h3>
-                    <span class="time-badge" id="badge-HTML">已累计: 0 分钟</span>
-                </div>
-                <div class="tech-card"
-                    onclick="openFocusPage('CSS', 'https://my.feishu.cn/wiki/HttEweqgEiwa5AkJqGQcgVZlnKg?fromScene=spaceOverview')">
-                    <h3 style="color:#3498db">CSS</h3>
-                    <span class="time-badge" id="badge-CSS">已累计: 0 分钟</span>
-                </div>
-                <div class="tech-card"
-                    onclick="openFocusPage('JavaScript', 'https://my.feishu.cn/wiki/CYxkwCpc3ikHVuk8HGIcLGcwnnh?fromScene=spaceOverview')">
-                    <h3 style="color:#f1c40f">JavaScript</h3>
-                    <span class="time-badge" id="badge-JavaScript">已累计: 0 分钟</span>
-                </div>
-                <div class="tech-card"
-                    onclick="openFocusPage('Vue', 'https://my.feishu.cn/wiki/Y8bZwrXB6ia4HakBtDSczoMfn8e?fromScene=spaceOverview')">
-                    <h3 style="color:#2ecc71">Vue.js</h3>
-                    <span class="time-badge" id="badge-Vue">已累计: 0 分钟</span>
-                </div>
-            </div>
-
-            <h2 class="section-title">📸 生活点滴相册</h2>
+            <h2 class="section-title">🌸 开启你的专注魔法</h2>
+            <div class="tech-grid" id="home-tech-grid"></div>
+            <h2 class="section-title">✨ 魔法学习瞬间</h2>
             <div class="gallery">
-                <div class="gallery-item"><img src="./图片/1.jpg"></div>
-                <div class="gallery-item"><img src="./图片/2.jpg"></div>
-                <div class="gallery-item"><img src="./图片/3.jpg"></div>
-                <div class="gallery-item"><img src="./图片/4.jpg"></div>
-                <div class="gallery-item"><img src="./图片/5.jpg"></div>
-                <div class="gallery-item"><img src="./图片/6.jpg"></div>
-                <div class="gallery-item"><img src="./图片/7.jpg"></div>
-                <div class="gallery-item"><img src="./图片/8.jpg"></div>
-                <div class="gallery-item"><img src="./图片/9.jpg"></div>
-                <div class="gallery-item"><img src="./图片/10.jpg"></div>
-                <div class="gallery-item"><img src="./图片/11.jpg"></div>
-                <div class="gallery-item"><img src="./图片/12.jpg"></div>
-                <div class="gallery-item"><img src="./图片/13.jpg"></div>
-                <div class="gallery-item"><img src="./图片/14.jpg"></div>
-                <div class="gallery-item"><img src="./图片/15.jpg"></div>
-                <div class="gallery-item"><img src="./图片/16.jpg"></div>
-                <div class="gallery-item"><img src="./图片/17.jpg"></div>
-                <div class="gallery-item"><img src="./图片/18.jpg"></div>
-                <div class="gallery-item"><img src="./图片/19.jpg"></div>
-                <div class="gallery-item"><img src="./图片/20.jpg"></div>
-                <div class="gallery-item"><img src="./图片/21.jpg"></div>
-                <div class="gallery-item"><img src="./图片/22.jpg"></div>
-                <div class="gallery-item"><img src="./图片/23.jpg"></div>
-                <div class="gallery-item"><img src="./图片/24.jpg"></div>
-                <div class="gallery-item"><img src="./图片/25.jpg"></div>
-                <div class="gallery-item"><img src="./图片/26.jpg"></div>
-                <div class="gallery-item"><img src="./图片/27.jpg"></div>
-                <div class="gallery-item"><img src="./图片/28.jpg"></div>
-                <div class="gallery-item"><img src="./图片/29.jpg"></div>
-                <div class="gallery-item"><img src="./图片/30.jpg"></div>
-                <div class="gallery-item"><img src="./图片/31.jpg"></div>
-                <div class="gallery-item"><img src="./图片/32.jpg"></div>
-                <div class="gallery-item"><img src="./图片/33.jpg"></div>
-                <div class="gallery-item"><img src="./图片/34.jpg"></div>
-                <div class="gallery-item"><img src="./图片/35.jpg"></div>
-                <div class="gallery-item"><img src="./图片/36.jpg"></div>
-                <div class="gallery-item"><img src="./图片/37.jpg"></div>
-                <div class="gallery-item"><img src="./图片/38.jpg"></div>
-                <div class="gallery-item"><img src="./图片/39.jpg"></div>
-                <div class="gallery-item"><img src="./图片/40.jpg"></div>
-                <div class="gallery-item"><img src="./图片/41.jpg"></div>
-                <div class="gallery-item"><img src="./图片/42.jpg"></div>
-
+                <script>for (let i = 1; i <= 42; i++) { document.write(`<div class="gallery-item"><img src="./图片/${i}.jpg"></div>`); }</script>
             </div>
         </div>
-        <footer>© 2026 Hannie-forever-me | 保持热爱，奔赴山海 🦄</footer>
+        <footer>
+            <p>© 2024 Hannie's Tech Journey | "Keep sparkling and keep learning!" </p>
+        </footer>
     </div>
 
     <div id="focus-page">
-        <button class="back-btn" onclick="closeFocusPage()">← 返回主页</button>
+        <div class="focus-header">
+            <span>Hannie's Focus Hub</span>
+            <button onclick="closeFocus()"
+                style="background:none; border:none; color:white; cursor:pointer; font-size:1.5rem;">×</button>
+        </div>
+
         <div class="focus-layout">
-            <div class="glass-card" style="text-align: center;">
-                <img src="./图片/头像.png" class="avatar">
-                <h3 id="focus-tech-title" style="color:var(--pony-deep)">正在学习</h3>
-                <p>📚 <b>飞书文档：</b></p>
-                <a href="https://my.feishu.cn/wiki/Q1ujwMOxNi4jKfkyWN8ceOfOnsg?fromScene=spaceOverview"
-                    id="feishu-link-display" target="_blank" style="color: var(--pony-deep);">点击打开学习资料</a>
+            <div class="glass-card-timer">
+                <div class="timer-circle"><img src="./图片/头像.png"></div>
+                <div id="timer-display" onclick="setCustomTime()">25:00</div>
+                <p id="focus-tip" style="font-size:0.85rem; color:var(--pony-pink); margin-top:15px;">专注进行中，加油哦！❤️</p>
+                <small style="color:#999; margin-top:5px;">点击数字修改时长</small>
             </div>
 
-
-            <div class="glass-card" style="text-align: center;">
-                <div class="timer-input-group">
-                    设置时间 (分): <input type="number" id="minutes-setting" value="25" min="1">
+            <div class="center-column">
+                <div class="sector-btns-box" id="sector-btns"></div>
+                <div class="pie-container">
+                    <h4 style="margin:0 0 10px 0; font-size:0.9rem; text-align:center; color:var(--pony-pink)">板块分布 (Xh
+                        Xm)</h4>
+                    <div style="flex-grow:1; position:relative;">
+                        <canvas id="pieChart"></canvas>
+                    </div>
                 </div>
-                <div class="pixel-timer" id="timer-display">25:00</div><br>
-                <button class="btn-start" id="ctrl-btn" onclick="toggleTimer()">开始专注</button>
-                <button onclick="resetTimer()"
-                    style="background:none; border:none; color:#999; cursor:pointer; margin-left:10px;">重置</button>
             </div>
 
-            <div class="glass-card">
-                <h3 style="text-align: center; color: var(--pony-deep);">📊 数据统计</h3>
-                <div class="chart-container"><canvas id="pieChart"></canvas></div>
-                <div class="chart-container"><canvas id="lineChart"></canvas></div>
+            <div class="data-area">
+                <div class="action-area">
+                    <button id="toggle-btn" class="btn-main" onclick="toggleTimer()">START FOCUS</button>
+                    <button class="btn-link" onclick="openLink()">🚀 打开飞书资料</button>
+                </div>
+
+                <div class="stat-card-row">
+                    <div class="small-stat">
+                        <h4>今日累计</h4>
+                        <p id="stat-today">0h 0m</p>
+                    </div>
+                    <div class="small-stat">
+                        <h4>周总计</h4>
+                        <p id="stat-week">0h 0m</p>
+                    </div>
+                </div>
+
+                <div class="line-chart-box">
+                    <h4 style="margin:0 0 10px 0; font-size:0.85rem">每周学习趋势 (0-12H)</h4>
+                    <div style="flex-grow:1; position:relative;">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        let timerId = null;
+        const TECH_CONFIG = {
+            'HTML': { color: '#ffadad', link: 'https://my.feishu.cn/wiki/KK1ywC376ikQ35kpvXjcL0oIn5g' },
+            'CSS': { color: '#ffd6a5', link: 'https://my.feishu.cn/wiki/HttEweqgEiwa5AkJqGQcgVZlnKg' },
+            'JavaScript': { color: '#fdffb6', link: 'https://my.feishu.cn/wiki/CYxkwCpc3ikHVuk8HGIcLGcwnnh' },
+            '工程化': { color: '#caffbf', link: 'https://my.feishu.cn/wiki/CYxkwCpc3ikHVuk8HGIcLGcwnnh' },
+            'Vue': { color: '#9bf6ff', link: 'https://my.feishu.cn/wiki/Y8bZwrXB6ia4HakBtDSczoMfn8e' },
+            'React': { color: '#a0c4ff', link: 'https://my.feishu.cn/wiki/Y8bZwrXB6ia4HakBtDSczoMfn8e' },
+            '八股': { color: '#bdb2ff', link: 'https://my.feishu.cn/wiki/CYxkwCpc3ikHVuk8HGIcLGcwnnh' }
+        };
+
+        let appData = JSON.parse(localStorage.getItem('hannie_v6_data')) || {
+            techMinutes: { 'HTML': 0, 'CSS': 0, 'JavaScript': 0, '工程化': 0, 'Vue': 0, 'React': 0, '八股': 0 },
+            dailyLog: {}
+        };
+
         let timeLeft = 25 * 60;
-        let currentTech = "";
-        let techStats = JSON.parse(localStorage.getItem('hannie_tech_stats')) || { HTML: 0, CSS: 0, JavaScript: 0, Vue: 0 };
+        let timerId = null;
+        let isRunning = false;
+        let currentTech = 'HTML';
         let pieChart, lineChart;
 
-        function refreshMainBadges() {
-            for (let tech in techStats) {
-                const badge = document.getElementById(`badge-${tech}`);
-                if (badge) badge.innerText = `已累计: ${techStats[tech]} 分钟`;
-            }
-        }
-        refreshMainBadges();
-
-        function openFocusPage(tech, url) {
-            currentTech = tech;
-            document.getElementById('focus-tech-title').innerText = `正在专注: ${tech}`;
-            document.getElementById('feishu-link-display').href = url;
-            document.getElementById('home-page').style.display = 'none';
-            document.getElementById('focus-page').style.display = 'block';
-            resetTimer();
-            initCharts();
+        function initButtons() {
+            const grid = document.getElementById('home-tech-grid');
+            const box = document.getElementById('sector-btns');
+            Object.keys(TECH_CONFIG).forEach(tech => {
+                grid.innerHTML += `<div class="tech-card" onclick="openFocus('${tech}')"><h3>${tech}</h3><span class="badge" id="b-${tech}">${appData.techMinutes[tech] || 0}m</span></div>`;
+                box.innerHTML += `<button class="sector-btn" id="btn-${tech}" onclick="switchTech('${tech}')" style="background:${TECH_CONFIG[tech].color}; color:${['JavaScript', '工程化'].includes(tech) ? '#666' : '#fff'}">${tech}</button>`;
+            });
+            box.innerHTML += `<p style="font-size:0.8rem; text-align:center; margin:5px 0 0 0">当前选中: <b id="current-label" style="color:var(--pony-pink)">HTML</b></p>`;
         }
 
-        function closeFocusPage() {
-            document.getElementById('focus-page').style.display = 'none';
-            document.getElementById('home-page').style.display = 'block';
-            if (timerId) { clearInterval(timerId); timerId = null; }
-            refreshMainBadges();
-        }
+        // 修改格式化函数，适配饼图显示 Xh Xm
+        function formatHM(totalMin) { return `${Math.floor(totalMin / 60)}h ${totalMin % 60}m`; }
 
         function toggleTimer() {
-            const btn = document.getElementById('ctrl-btn');
-            if (timerId) {
-                clearInterval(timerId);
-                timerId = null;
-                btn.innerText = "继续专注";
+            if (!isRunning) {
+                isRunning = true;
+                document.getElementById('toggle-btn').innerText = "PAUSE FOCUS";
+                document.getElementById('toggle-btn').classList.add('running');
+                timerId = setInterval(tick, 1000);
             } else {
-                btn.innerText = "正在专注...";
-                timerId = setInterval(() => {
-                    timeLeft--;
-                    updateTimerUI();
-                    if (timeLeft <= 0) {
-                        clearInterval(timerId);
-                        timerId = null;
-                        const sessionMins = parseInt(document.getElementById('minutes-setting').value);
-                        techStats[currentTech] += sessionMins;
-                        localStorage.setItem('hannie_tech_stats', JSON.stringify(techStats));
-                        alert("🎉 专注完成！起来站一站吧！");
-                        resetTimer();
-                        updateCharts();
-                    }
-                }, 1000);
+                pauseTimer();
             }
         }
 
-        function updateTimerUI() {
-            const m = Math.floor(timeLeft / 60);
-            const s = timeLeft % 60;
-            document.getElementById('timer-display').innerText =
-                `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        function pauseTimer() {
+            isRunning = false;
+            clearInterval(timerId);
+            document.getElementById('toggle-btn').innerText = "RESUME FOCUS";
+            document.getElementById('toggle-btn').classList.remove('running');
         }
 
-        function resetTimer() {
-            if (timerId) clearInterval(timerId);
-            timerId = null;
-            const setMins = parseInt(document.getElementById('minutes-setting').value) || 25;
-            timeLeft = setMins * 60;
-            updateTimerUI();
-            document.getElementById('ctrl-btn').innerText = "开始专注";
+        function tick() {
+            if (timeLeft > 0) {
+                timeLeft--; renderTimer();
+                if (timeLeft % 60 === 0) {
+                    const today = new Date().toISOString().split('T')[0];
+                    appData.techMinutes[currentTech]++;
+                    appData.dailyLog[today] = (appData.dailyLog[today] || 0) + 1;
+                    localStorage.setItem('hannie_v6_data', JSON.stringify(appData));
+                    updateUI();
+                }
+            } else {
+                pauseTimer(); alert("番茄完成！太棒了~ ✨");
+            }
+        }
+
+        function updateUI() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('stat-today').innerText = formatHM(appData.dailyLog[today] || 0);
+            let weekTotal = 0; const weekHours = [];
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date(); d.setDate(d.getDate() - i);
+                const ds = d.toISOString().split('T')[0];
+                const min = appData.dailyLog[ds] || 0;
+                weekTotal += min; weekHours.push((min / 60).toFixed(1));
+            }
+            document.getElementById('stat-week').innerText = formatHM(weekTotal);
+            Object.keys(TECH_CONFIG).forEach(t => { if (document.getElementById('b-' + t)) document.getElementById('b-' + t).innerText = (appData.techMinutes[t] || 0) + 'm'; });
+            if (pieChart) { pieChart.data.datasets[0].data = Object.values(appData.techMinutes); pieChart.update(); }
+            if (lineChart) { lineChart.data.datasets[0].data = weekHours; lineChart.update(); }
         }
 
         function initCharts() {
-            if (pieChart) pieChart.destroy();
-            if (lineChart) lineChart.destroy();
             const ctxP = document.getElementById('pieChart').getContext('2d');
             pieChart = new Chart(ctxP, {
                 type: 'pie',
                 data: {
-                    labels: ['HTML', 'CSS', 'JS', 'Vue'],
+                    labels: Object.keys(TECH_CONFIG),
                     datasets: [{
-                        data: [techStats.HTML, techStats.CSS, techStats.JavaScript, techStats.Vue],
-                        backgroundColor: ['#ff9f43', '#3498db', '#f1c40f', '#2ecc71']
+                        data: Object.values(appData.techMinutes),
+                        backgroundColor: Object.values(TECH_CONFIG).map(t => t.color),
+                        borderWidth: 2, borderColor: '#fff'
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false }
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => ` ${context.label}: ${formatHM(context.raw)}`
+                            }
+                        }
+                    }
+                }
             });
+
             const ctxL = document.getElementById('lineChart').getContext('2d');
             lineChart = new Chart(ctxL, {
                 type: 'line',
                 data: {
-                    labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                     datasets: [{
-                        label: '专注时长',
-                        data: [30, 45, 60, 20, 90, 100, 50],
-                        borderColor: '#ff85a1', tension: 0.4
+                        data: [0, 0, 0, 0, 0, 0, 0],
+                        borderColor: '#ff69b4',
+                        backgroundColor: 'rgba(255,105,180,0.1)',
+                        fill: true, tension: 0.4
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false }
+                options: {
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max: 12 } },
+                    plugins: { legend: { display: false } }
+                }
             });
         }
 
-        function updateCharts() {
-            if (pieChart) {
-                pieChart.data.datasets[0].data = [techStats.HTML, techStats.CSS, techStats.JavaScript, techStats.Vue];
-                pieChart.update();
-            }
+        function renderTimer() {
+            const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+            const s = (timeLeft % 60).toString().padStart(2, '0');
+            document.getElementById('timer-display').innerText = `${m}:${s}`;
         }
+
+        function setCustomTime() {
+            pauseTimer();
+            const min = prompt("设定专注分钟数:", "25");
+            if (min && !isNaN(min)) { timeLeft = min * 60; renderTimer(); }
+        }
+
+        function switchTech(tech) {
+            currentTech = tech;
+            document.getElementById('current-label').innerText = tech;
+            document.querySelectorAll('.sector-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + tech).classList.add('active');
+        }
+
+        function openLink() { window.open(TECH_CONFIG[currentTech].link, '_blank'); }
+
+        function openFocus(tech) {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('focus-page').style.display = 'block';
+            switchTech(tech);
+            if (!pieChart) initCharts();
+            updateUI();
+        }
+
+        function closeFocus() {
+            pauseTimer();
+            document.getElementById('focus-page').style.display = 'none';
+            document.getElementById('home-page').style.display = 'block';
+            updateUI();
+        }
+
+        initButtons();
+        updateUI();
     </script>
 </body>
 
