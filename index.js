@@ -1,6 +1,4 @@
-// index.js 完整内容
 
-// 1. 配置和全局变量
 const TECH_CONFIG = {
     'HTML': { color: '#ffadad', link: 'https://my.feishu.cn/wiki/KK1ywC376ikQ35kpvXjcL0oIn5g' },
     'CSS': { color: '#ffd6a5', link: 'https://my.feishu.cn/wiki/HttEweqgEiwa5AkJqGQcgVZlnKg' },
@@ -22,11 +20,10 @@ let isRunning = false;
 let currentTech = 'HTML';
 let pieChart, lineChart;
 
-// --- 核心修改：等待页面加载完毕后再执行入口函数 ---
 window.onload = function () {
     initButtons();
     updateUI();
-    // 如果你有其他需要在启动时执行的逻辑放在这里
+
 };
 
 // 2. 初始化按钮（首页卡片和专注页切换按钮）
@@ -34,9 +31,9 @@ function initButtons() {
     const grid = document.getElementById('home-tech-grid');
     const box = document.getElementById('sector-btns');
 
-    if (!grid || !box) return; // 安全检查
+    if (!grid || !box) return;
 
-    grid.innerHTML = ''; // 清空原有内容
+    grid.innerHTML = '';
     box.innerHTML = '';
 
     Object.keys(TECH_CONFIG).forEach(tech => {
@@ -46,7 +43,7 @@ function initButtons() {
     box.innerHTML += `<p style="font-size:0.8rem; text-align:center; margin:5px 0 0 0">当前选中: <b id="current-label" style="color:var(--pony-pink)">HTML</b></p>`;
 }
 
-// 3. 计时器核心逻辑
+// 3. 计时器
 function formatHM(totalMin) { return `${Math.floor(totalMin / 60)}h ${totalMin % 60}m`; }
 
 function toggleTimer() {
@@ -82,7 +79,7 @@ function tick() {
         }
     } else {
         pauseTimer();
-        alert("番茄完成！太棒了~ ✨");
+        alert("番茄完成！太棒了~ ");
     }
 }
 
@@ -194,7 +191,7 @@ function openFocus(tech) {
     document.getElementById('home-page').style.display = 'none';
     document.getElementById('focus-page').style.display = 'block';
     switchTech(tech);
-    if (!pieChart) initCharts(); // 第一次打开时初始化图表
+    if (!pieChart) initCharts();
     updateUI();
 }
 

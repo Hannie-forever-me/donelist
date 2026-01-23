@@ -5,7 +5,7 @@
     --glass-white: rgba(255, 255, 255, 0.95);
 }
 
-/* 基础修正：确保平滑滚动并防止内容切断 */
+
 html {
     scroll-behavior: smooth;
 }
@@ -18,12 +18,11 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 首页导航栏 (保留你的结构，并加上右上角链接支持) --- */
+/* 首页导航栏 */
 nav {
     background: white;
     padding: 0 10%;
     height: 70px;
-    /* 固定高度方便对齐 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,31 +38,13 @@ nav {
     font-size: 1.4rem;
 }
 
-/* 新增：右上角超链接容器样式 */
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #666;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--pony-pink);
-}
-
-/* --- 首页主体 --- */
+/* 首页 */
 .container {
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* 修正锚点：点击导航后标题不会被遮住 */
 section {
     scroll-margin-top: 90px;
 }
@@ -142,7 +123,7 @@ footer {
     margin-top: 50px;
 }
 
-/* --- 专注页 (修正错位问题) --- */
+/* 专注页  */
 #focus-page {
     display: none;
     position: fixed;
@@ -164,19 +145,17 @@ footer {
     align-items: center;
 }
 
-/* 重点优化：调整列宽比例，解决左右挤压问题 */
 .focus-layout {
     max-width: 1300px;
     margin: 30px auto;
     display: grid;
     grid-template-columns: 350px 380px 1fr;
-    /* 分配更合理的宽度 */
     gap: 25px;
     padding: 0 20px;
     align-items: stretch;
 }
 
-/* 左侧：番茄钟卡片内容居中 */
+/* 左侧：番茄钟 */
 .glass-card-timer {
     background: var(--glass-white);
     border-radius: 35px;
@@ -186,7 +165,6 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* 垂直分布更美观 */
     align-items: center;
 }
 
@@ -209,7 +187,6 @@ footer {
 
 #timer-display {
     font-size: 4.5rem;
-    /* 稍微加大一点 */
     font-weight: bold;
     color: var(--pony-pink);
     margin: 10px 0;
@@ -225,7 +202,6 @@ footer {
 
 .sector-btns-box {
     display: grid;
-    /* 改为网格，按钮排列更整齐 */
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     background: var(--glass-white);
@@ -259,7 +235,6 @@ footer {
     display: flex;
     flex-direction: column;
     min-height: 320px;
-    /* 给饼图留够空间 */
 }
 
 /* 右侧列 */
@@ -330,5 +305,4 @@ footer {
     display: flex;
     flex-direction: column;
     min-height: 300px;
-    /* 给趋势图留够空间 */
 }
