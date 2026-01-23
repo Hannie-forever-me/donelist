@@ -1,0 +1,334 @@
+:root {
+    --pony-pink: #ff69b4;
+    --pony-soft: #fff0f6;
+    --pony-deep: #ff85a1;
+    --glass-white: rgba(255, 255, 255, 0.95);
+}
+
+/* 基础修正：确保平滑滚动并防止内容切断 */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'PingFang SC', sans-serif;
+    margin: 0;
+    background: var(--pony-soft);
+    color: #4a4a4a;
+    overflow-x: hidden;
+}
+
+/* --- 首页导航栏 (保留你的结构，并加上右上角链接支持) --- */
+nav {
+    background: white;
+    padding: 0 10%;
+    height: 70px;
+    /* 固定高度方便对齐 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(255, 133, 161, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.logo {
+    font-weight: bold;
+    color: var(--pony-deep);
+    font-size: 1.4rem;
+}
+
+/* 新增：右上角超链接容器样式 */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--pony-pink);
+}
+
+/* --- 首页主体 --- */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* 修正锚点：点击导航后标题不会被遮住 */
+section {
+    scroll-margin-top: 90px;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 20px 40px rgba(255, 133, 161, 0.1);
+    margin-bottom: 50px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid var(--pony-soft);
+}
+
+.section-title {
+    color: var(--pony-deep);
+    text-align: center;
+    margin: 40px 0 20px;
+    font-size: 1.4rem;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.tech-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border-bottom: 4px solid transparent;
+}
+
+.tech-card:hover {
+    border-bottom-color: var(--pony-pink);
+    transform: translateY(-5px);
+}
+
+.gallery {
+    column-count: 4;
+    column-gap: 15px;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    display: block;
+}
+
+footer {
+    background: white;
+    padding: 30px;
+    text-align: center;
+    color: #999;
+    font-size: 0.85rem;
+    margin-top: 50px;
+}
+
+/* --- 专注页 (修正错位问题) --- */
+#focus-page {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ffe4e1 0%, #fff0f5 100%);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.focus-header {
+    background: var(--pony-pink);
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 重点优化：调整列宽比例，解决左右挤压问题 */
+.focus-layout {
+    max-width: 1300px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 350px 380px 1fr;
+    /* 分配更合理的宽度 */
+    gap: 25px;
+    padding: 0 20px;
+    align-items: stretch;
+}
+
+/* 左侧：番茄钟卡片内容居中 */
+.glass-card-timer {
+    background: var(--glass-white);
+    border-radius: 35px;
+    padding: 40px 20px;
+    border: 2px solid white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* 垂直分布更美观 */
+    align-items: center;
+}
+
+.timer-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 8px solid #ffb6c1;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 20px rgba(255, 133, 161, 0.1);
+}
+
+.timer-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#timer-display {
+    font-size: 4.5rem;
+    /* 稍微加大一点 */
+    font-weight: bold;
+    color: var(--pony-pink);
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+/* 中间列 */
+.center-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sector-btns-box {
+    display: grid;
+    /* 改为网格，按钮排列更整齐 */
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    background: var(--glass-white);
+    padding: 20px;
+    border-radius: 25px;
+    border: 2px solid white;
+}
+
+.sector-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.85rem;
+}
+
+.sector-btn.active {
+    outline: 4px solid var(--pony-pink);
+    transform: scale(1.05);
+}
+
+.pie-container {
+    background: var(--glass-white);
+    border-radius: 25px;
+    padding: 25px;
+    border: 2px solid white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+    /* 给饼图留够空间 */
+}
+
+/* 右侧列 */
+.data-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.action-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-main {
+    background: white;
+    border: 3px solid var(--pony-pink);
+    border-radius: 20px;
+    padding: 15px;
+    cursor: pointer;
+    color: var(--pony-pink);
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+.btn-main:hover {
+    background: var(--pony-pink);
+    color: white;
+}
+
+.btn-main.running {
+    background: #ffecf2;
+    border-style: dashed;
+}
+
+.btn-link {
+    background: var(--pony-deep);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.stat-card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.small-stat {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+.line-chart-box {
+    background: white;
+    padding: 25px;
+    border-radius: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    /* 给趋势图留够空间 */
+}
